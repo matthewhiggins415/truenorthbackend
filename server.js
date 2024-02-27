@@ -6,9 +6,29 @@ const dotenv = require("dotenv");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const auth = require('./lib/auth.js');
+
+// Routes
+const userRoutes = require('./routes/userRoutes');
+const contactRoutes = require('./routes/contactRoutes.js')
+
 dotenv.config();
 
 const app = express();
+
+// connect to db
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(`${process.env.MONGO_URI}`);
+    
+    console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
+  } catch(error) {
+    console.error(`Error: ${error.message}`.red.underline.bold);
+    process.exit(1);
+  }
+}
+  
+connectDB();
 
 app.use(cors({
   origin: true
@@ -16,7 +36,13 @@ app.use(cors({
   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-  
+
+// Routes
+app.use(auth);
+app.use(userRoutes);
+app.use(contactRoutes);
+
+// Ontraport Route  
 app.get('/', (req, res) => {
   res.json({ message: `here's process.env.NODE_ENV: ${process.env.NODE_ENV}` });
 })
