@@ -30,11 +30,9 @@ const connectDB = async () => {
   
 connectDB();
 
-const corsOptions = {
-  origin: 'https://firesafechimneycare.com', // Specify your allowed origin here
-};
-
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: true
+}))
   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
