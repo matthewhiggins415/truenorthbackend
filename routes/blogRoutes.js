@@ -47,6 +47,10 @@ router.put('/updateblog/:id', requireToken, async (req, res, next) => {
   
   try {
     let blog = await Blog.findById(blogID);
+
+    if (updateBlog.img) {
+        blog.img = updateBlog.img;
+      }
         
     if (updateBlog.title) {
       blog.title = updateBlog.title;
@@ -160,6 +164,26 @@ router.delete('/blog/:id', requireToken, async (req, res, next) => {
       res.json({ msg: 'something went wrong'})
     }
 })
-  
+
+// get all public blogs
+router.get('/ourblogs', async (req, res, next) => {
+  try {
+    let blogs = await Blog.find({ isPublished: true });
+    res.json({ blogs: blogs })
+  } catch(e) {
+    res.json({ msg: 'something went wrong'})
+  }
+})
+
+// get all single public blog
+router.get('/ourblogs/:id', async (req, res, next) => {
+  let blogID = req.params.id
+  try {
+    let blog = await Blog.findById(blogID);
+    res.json({ blog: blog })
+  } catch(e) {
+    res.json({ msg: 'something went wrong'})
+  }
+})
 
 module.exports = router;
