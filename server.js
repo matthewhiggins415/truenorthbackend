@@ -37,11 +37,6 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Routes
-app.use(auth);
-app.use(userRoutes);
-app.use(contactRoutes);
-
 // Ontraport Route  
 app.get('/', (req, res) => {
   res.json({ message: `here's process.env.NODE_ENV: ${process.env.NODE_ENV}` });
@@ -72,6 +67,10 @@ app.post('/contactFormSubmit', async (req, res, next) => {
   }
 })
 
+// Routes
+app.use(auth);
+app.use(userRoutes);
+app.use(contactRoutes);
 
 const port = process.env.PORT || 5000
 
