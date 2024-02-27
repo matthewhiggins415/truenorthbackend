@@ -104,14 +104,14 @@ router.put('/updatecontact/:id', requireToken, async (req, res, next) => {
   } catch(error) {
     res.status(500).json({ msg: 'something went wrong' });
   }
-  })
+})
 
 // delete a single contact
 router.delete('/contacts/:id', requireToken, async (req, res, next) => {
   const id = req.params.id;
   try {
-    let contact = await Contact.findById(id);
-    res.status(204).json({ contact: contact })
+    let contact = await Contact.findByIdAndDelete(id);
+    res.status(204).json({ msg: 'contact deleted' })
   } catch(e) {
     res.json({ msg: 'something went wrong'})
   }

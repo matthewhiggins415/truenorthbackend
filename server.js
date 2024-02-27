@@ -10,7 +10,8 @@ const auth = require('./lib/auth.js');
 
 // Routes
 const userRoutes = require('./routes/userRoutes');
-const contactRoutes = require('./routes/contactRoutes.js')
+const contactRoutes = require('./routes/contactRoutes.js');
+const blogRoutes = require('./routes/blogRoutes.js');
 
 dotenv.config();
 
@@ -71,6 +72,7 @@ app.post('/contactFormSubmit', async (req, res, next) => {
 app.use(auth);
 app.use(userRoutes);
 app.use(contactRoutes);
+app.use(blogRoutes);
 
 const port = process.env.PORT || 5000
 
