@@ -117,4 +117,21 @@ router.delete('/contacts/:id', requireToken, async (req, res, next) => {
   }
 })
 
+// search for contacts
+router.post(`/contacts/search`, async (req, res, next) => {
+  const value = req.body.searchValue;
+  const searchType = req.body.searchType;
+
+  try {
+    const query = {};
+    query[searchType] = value;
+
+    const contacts = await Contact.find(query);
+    res.json({ contacts: contacts });
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
 module.exports = router;
