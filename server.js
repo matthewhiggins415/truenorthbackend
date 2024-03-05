@@ -12,6 +12,8 @@ const auth = require('./lib/auth.js');
 const userRoutes = require('./routes/userRoutes');
 const contactRoutes = require('./routes/contactRoutes.js');
 const blogRoutes = require('./routes/blogRoutes.js');
+const visitorRoutes = require('./routes/visitorRoutes.js');
+const serviceRoutes = require('./routes/serviceRoutes.js')
 
 dotenv.config();
 
@@ -38,11 +40,18 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Ontraport Route  
-app.get('/', (req, res) => {
-  res.json({ message: `here's process.env.NODE_ENV: ${process.env.NODE_ENV}` });
-})
+// app.get('/', (request, response) => {
+//   const ip = request.socket.remoteAddress;
 
+//   const today = new Date().toISOString().slice(0, 10);
+//   console.log(today)
+
+//   return response.json({
+//     ip
+//   });
+// })
+  
+// Ontraport Route  
 app.post('/contactFormSubmit', async (req, res, next) => {
   const ontraportUrl = `${process.env.ONTRAPORT_URL}`;
 
@@ -73,6 +82,8 @@ app.use(auth);
 app.use(userRoutes);
 app.use(contactRoutes);
 app.use(blogRoutes);
+app.use(visitorRoutes);
+app.use(serviceRoutes);
 
 const port = process.env.PORT || 5000
 
