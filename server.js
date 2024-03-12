@@ -14,6 +14,7 @@ const contactRoutes = require('./routes/contactRoutes.js');
 const blogRoutes = require('./routes/blogRoutes.js');
 const serviceRoutes = require('./routes/serviceRoutes.js')
 const companyRoutes = require('./routes/companyRoutes.js');
+const csvRoutes = require('./routes/csvRoutes.js');
 
 dotenv.config();
 
@@ -39,17 +40,6 @@ app.use(cors({
   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// app.get('/', (request, response) => {
-//   const ip = request.socket.remoteAddress;
-
-//   const today = new Date().toISOString().slice(0, 10);
-//   console.log(today)
-
-//   return response.json({
-//     ip
-//   });
-// })
   
 // Ontraport Route  
 app.post('/contactFormSubmit', async (req, res, next) => {
@@ -84,6 +74,7 @@ app.use(contactRoutes);
 app.use(blogRoutes);
 app.use(serviceRoutes);
 app.use(companyRoutes);
+app.use(csvRoutes);
 
 const port = process.env.PORT || 5000
 
