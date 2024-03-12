@@ -33,6 +33,9 @@ const contactSchema = new Schema({
   address: {
     type: String
   },
+  unit: {
+    type: String
+  },
   city: {
     type: String
   },

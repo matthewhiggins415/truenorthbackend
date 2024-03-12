@@ -24,6 +24,7 @@ router.get('/contacts-csv-download', requireToken, async (req, res, next) => {
       'chimneyType',
       'homeType',
       'address',
+      'unit',
       'city',
       'zip',
       'notes'

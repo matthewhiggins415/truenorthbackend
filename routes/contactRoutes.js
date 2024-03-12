@@ -86,6 +86,10 @@ router.put('/updatecontact/:id', requireToken, async (req, res, next) => {
       contact.address = updatedContact.address;
     }
 
+    if (updatedContact.unit) {
+      contact.unit = updatedContact.unit;
+    }
+
     if (updatedContact.city) {
       contact.city = updatedContact.city;
     }
