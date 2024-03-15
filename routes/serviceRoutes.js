@@ -91,6 +91,28 @@ router.put('/updateservice/:id', requireToken, async (req, res, next) => {
   }
 })
 
+// update a service's image 
+router.put('/update-service-image/:id', async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    let service = await Service.findById(id);
+
+    let newImg = req.body.image;
+
+    if (newImg) {
+      service.img = newImg;
+    }
+    
+    let updatedService = await service.save();
+
+    res.json({ updatedService: updatedService });
+  } catch(e) {
+    console.log(e)
+    res.json({ msg: 'something went wrong'})
+  }
+})
+
 // delete service
 router.delete('/service/:id', requireToken, async (req, res, next) => {
   const id = req.params.id;

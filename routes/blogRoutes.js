@@ -186,4 +186,26 @@ router.get('/ourblogs/:id', async (req, res, next) => {
   }
 })
 
+// update a blogs's image 
+router.put('/update-blog-image/:id', async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    let blog = await Blog.findById(id);
+
+    let newImg = req.body.image;
+
+    if (newImg) {
+      blog.img = newImg;
+    }
+    
+    let updatedBlog = await blog.save();
+
+    res.json({ updatedBlog: updatedBlog });
+  } catch(e) {
+    console.log(e)
+    res.json({ msg: 'something went wrong'})
+  }
+})
+
 module.exports = router;

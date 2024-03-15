@@ -5,6 +5,7 @@ const color = require('colors');
 const dotenv = require("dotenv");
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const auth = require('./lib/auth.js');
 
@@ -15,6 +16,7 @@ const blogRoutes = require('./routes/blogRoutes.js');
 const serviceRoutes = require('./routes/serviceRoutes.js')
 const companyRoutes = require('./routes/companyRoutes.js');
 const csvRoutes = require('./routes/csvRoutes.js');
+const uploadRoutes = require('./routes/uploadRoutes.js');
 
 dotenv.config();
 
@@ -75,6 +77,8 @@ app.use(blogRoutes);
 app.use(serviceRoutes);
 app.use(companyRoutes);
 app.use(csvRoutes);
+app.use(uploadRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const port = process.env.PORT || 5000
 

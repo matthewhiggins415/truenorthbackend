@@ -94,4 +94,26 @@ router.put('/update-company/:id', requireToken, async (req, res, next) => {
   }
 })
 
+// update a company's image 
+router.put('/update-company-image/:id', async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    let company = await Company.findById(id);
+
+    let newImg = req.body.image;
+
+    if (newImg) {
+      company.companyImage = newImg;
+    }
+    
+    let updatedCompany = await company.save();
+
+    res.json({ updatedCompany: updatedCompany });
+  } catch(e) {
+    console.log(e)
+    res.json({ msg: 'something went wrong'})
+  }
+})
+
 module.exports = router;
