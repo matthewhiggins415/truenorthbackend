@@ -42,32 +42,6 @@ app.use(cors({
   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-  
-// Ontraport Route  
-app.post('/contactFormSubmit', async (req, res, next) => {
-  const ontraportUrl = `${process.env.ONTRAPORT_URL}`;
-
-  const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Api-Key': `${process.env.ONTRAPORT_API_KEY}`,
-    'Api-Appid': `${process.env.ONTRAPORT_API_ID}`
-  };
-
-  const urlSearchParams = new URLSearchParams(req.body);
-  const formDataString = urlSearchParams.toString();
-  const payload = formDataString
-
-  try {
-      const apiResponse = await axios.post(ontraportUrl, payload, {headers: headers})
-
-      if (apiResponse.status === 200) {
-        console.log(apiResponse)
-        res.json({ status: 200 })
-      }
-  } catch (error) {
-      res.json({ errMsg: "something went wrong" })
-  }
-})
 
 // Routes
 app.use(auth);
