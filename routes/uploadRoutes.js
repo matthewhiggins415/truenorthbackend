@@ -25,6 +25,7 @@ const upload = multer({ storage: storage });
 // Upload route
 router.post('/upload-image', async (req, res) => {
   console.log(req.file)
+  console.log(req.formData)
   try {
     upload.single('image')(req, res, (err) => {
       if (err instanceof multer.MulterError) {
