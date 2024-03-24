@@ -28,7 +28,7 @@ router.post('/contact', async (req, res, next) => {
       
     let mailOptions = {
       from: process.env.EMAIL_ADDRESS,
-      to: 'higginscolin16@yahoo.com',
+      to: 'w.colin.higgins@gmail.com',
       subject: 'new contact @ truenorthheat.com!',
       text: `Hey there, someone wants to get in touch with you. Login to truenorthheat.com and check for new contacts.`
     };
