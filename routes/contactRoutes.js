@@ -1,6 +1,7 @@
 const express = require('express');
 const Contact = require('../models/contactModel');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
 
 // passing this as a second argument to `router.<verb>` will make it
 // so that a token MUST be passed for that route to be available
@@ -15,6 +16,31 @@ router.post('/contact', async (req, res, next) => {
 
   try {
     let newContact = await Contact.create(req.body)
+
+    // send email 
+    let transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: process.env.EMAIL_ADDRESS, // your Gmail address
+        pass: process.env.EMAIL_PASS,    // your Gmail password
+      },
+    });
+      
+    let mailOptions = {
+      from: process.env.EMAIL_ADDRESS,
+      to: 'higginscolin16@yahoo.com',
+      subject: 'new contact @ truenorthheat.com!',
+      text: `Hey there, someone wants to get in touch with you. Login to truenorthheat.com and check for new contacts.`
+    };
+  
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
     res.status(201).json({ contact: newContact })
   } catch(e) {
     res.status(500).json({ msg: 'Error creating contact'})
