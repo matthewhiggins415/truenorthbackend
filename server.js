@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+require('dotenv').config();
 
 const auth = require('./lib/auth.js');
 
