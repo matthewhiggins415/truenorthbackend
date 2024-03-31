@@ -18,6 +18,7 @@ const serviceRoutes = require('./routes/serviceRoutes.js')
 const companyRoutes = require('./routes/companyRoutes.js');
 const csvRoutes = require('./routes/csvRoutes.js');
 const uploadRoutes = require('./routes/uploadRoutes.js');
+const jobRoutes = require('./routes/jobRoutes.js');
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes
 app.use(auth);
+app.use(jobRoutes);
 app.use(userRoutes);
 app.use(contactRoutes);
 app.use(blogRoutes);
