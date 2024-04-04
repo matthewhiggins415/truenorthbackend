@@ -17,8 +17,10 @@ const blogRoutes = require('./routes/blogRoutes.js');
 const serviceRoutes = require('./routes/serviceRoutes.js')
 const companyRoutes = require('./routes/companyRoutes.js');
 const csvRoutes = require('./routes/csvRoutes.js');
-const uploadRoutes = require('./routes/uploadRoutes.js');
+// const uploadRoutes = require('./routes/uploadRoutes.js');
 const jobRoutes = require('./routes/jobRoutes.js');
+const firebaseRoutes = require('./routes/firebaseRoutes.js');
+const imageRoutes = require('./routes/imageRoutes.js');
 
 dotenv.config();
 
@@ -54,7 +56,9 @@ app.use(blogRoutes);
 app.use(serviceRoutes);
 app.use(companyRoutes);
 app.use(csvRoutes);
-app.use(uploadRoutes);
+// app.use(uploadRoutes);
+app.use(firebaseRoutes);
+app.use(imageRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const port = process.env.PORT || 5000

@@ -85,7 +85,7 @@ router.put('/updateservice/:id', requireToken, async (req, res, next) => {
         
     let newService = await service.save();
             
-    res.json({ newService: newService });
+    res.status(201).json({ newService: newService });
   } catch(error) {
     res.status(500).json({ msg: 'something went wrong' });
   }
