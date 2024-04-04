@@ -118,7 +118,7 @@ router.put('/updateblog/:id', requireToken, async (req, res, next) => {
       
     let newBlog = await blog.save();
           
-    res.json({ newBlog: newBlog });
+    res.status(201).json({ newBlog: newBlog });
   } catch(error) {
     res.status(500).json({ msg: 'something went wrong' });
   }
@@ -133,7 +133,7 @@ router.put('/blog/publish/:id', requireToken, async (req, res, next) => {
     blog.isPublished = true;
     let updatedBlog = await blog.save();
 
-    res.json({ updatedBlog: updatedBlog })
+    res.status(201).json({ updatedBlog: updatedBlog })
   } catch(e) {
     res.json({ msg: 'something went wrong'})
   }
@@ -159,7 +159,7 @@ router.delete('/blog/:id', requireToken, async (req, res, next) => {
     const id = req.params.id;
     try {
       let blog = await Blog.findByIdAndDelete(id);
-      res.status(204).json({ msg: 'blog deleted' })
+      res.json({ msg: 'blog deleted' })
     } catch(e) {
       res.json({ msg: 'something went wrong'})
     }
