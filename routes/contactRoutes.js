@@ -43,6 +43,7 @@ router.post('/contact', async (req, res, next) => {
 
     res.status(201).json({ contact: newContact })
   } catch(e) {
+    console.log(e)
     res.status(500).json({ msg: 'Error creating contact'})
   }
 });
@@ -92,20 +93,24 @@ router.put('/updatecontact/:id', requireToken, async (req, res, next) => {
       contact.cell_phone = updatedContact.cell_phone
     }
       
-    if (updatedContact.homeType) {
-      contact.homeType = updatedContact.homeType;
-    }
-      
-    if (updatedContact.roofType) {
-      contact.roofType = updatedContact.roofType;
+    if (updatedContact.systemType) {
+      contact.systemType = updatedContact.systemType;
     }
 
-    if (updatedContact.chimneyType) {
-        contact.chimneyType = updatedContact.chimneyType;
+    if (updatedContact.modelNumber) {
+        contact.modelNumber = updatedContact.modelNumber;
     }
         
-    if (updatedContact.chimneys) {
-      contact.chimneys = updatedContact.chimneys;
+    if (updatedContact.serialNumber) {
+      contact.serialNumber = updatedContact.serialNumber;
+    }
+
+    if (updatedContact.fuelType) {
+      contact.fuelType = updatedContact.fuelType;
+    }
+
+    if (updatedContact.systemSize) {
+      contact.systemSize = updatedContact.systemSize;
     }
     
     if (updatedContact.address) {
@@ -132,6 +137,7 @@ router.put('/updatecontact/:id', requireToken, async (req, res, next) => {
         
     res.json({ newContact: newContact });
   } catch(error) {
+    console.log(error)
     res.status(500).json({ msg: 'something went wrong' });
   }
 })

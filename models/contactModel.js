@@ -18,16 +18,19 @@ const contactSchema = new Schema({
   cell_phone: {
     type: String
   },
-  chimneys: {
-    type: Number
-  },
-  roofType: {
+  systemType: {
     type: String
   },
-  homeType: {
+  modelNumber: {
     type: String
   },
-  chimneyType: {
+  serialNumber: {
+    type: String
+  },
+  fuelType: {
+    type: String
+  },
+  systemSize: {
     type: String
   },
   address: {
